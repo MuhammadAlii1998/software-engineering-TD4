@@ -1,5 +1,3 @@
-package.json
-package-lock.json
 
 # Other common Node.js ignores
 node_modules/
