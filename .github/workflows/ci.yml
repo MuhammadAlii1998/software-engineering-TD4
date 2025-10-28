@@ -24,6 +24,8 @@ jobs:
 
       # 3) Install dependencies
       - name: Install dependencies
+        env:
+            NPM_CONFIG_LEGACY_PEER_DEPS: "true"
         run: npm ci
 
       # 4) Lint
