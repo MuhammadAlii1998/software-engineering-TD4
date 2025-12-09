@@ -1,5 +1,5 @@
 // src/data/store.js
-module.exports = {
+export default {
   users: [],          // {id, name, email, role, passwordHash}
   products: [],       // {id, sellerId, name, price, approved}
   orders: [],         // {id, buyerId, productId, status}

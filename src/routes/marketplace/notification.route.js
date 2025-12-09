@@ -1,9 +1,9 @@
 // src/routes/marketplace/notification.route.js
-const express = require('express');
-const router = express.Router();
-const store = require('../../data/store');
-const { verifyToken } = require('../../utils/auth.util');
-const { v4: uuidv4 } = require('uuid');
+import { Router } from 'express';
+import store from '../../data/store.js';
+import { verifyToken } from '../../utils/auth.util.js';
+
+const router = Router();
 
 // Get notifications
 router.get('/', verifyToken, (req, res) => {
@@ -19,4 +19,4 @@ router.patch('/:id/read', verifyToken, (req, res) => {
   res.json(notification);
 });
 
-module.exports = router;
+export default router;

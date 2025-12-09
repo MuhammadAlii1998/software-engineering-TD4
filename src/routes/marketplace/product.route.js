@@ -1,9 +1,10 @@
 // src/routes/marketplace/product.route.js
-const express = require('express');
-const router = express.Router();
-const store = require('../../data/store');
-const { verifyToken, requireRole } = require('../../utils/auth.util');
-const { v4: uuidv4 } = require('uuid');
+import { Router } from 'express';
+import store from '../../data/store.js';
+import { verifyToken, requireRole } from '../../utils/auth.util.js';
+import { v4 as uuidv4 } from 'uuid';
+
+const router = Router();
 
 // Create product (seller only)
 router.post('/', verifyToken, requireRole('seller'), (req, res) => {
@@ -43,4 +44,4 @@ router.patch('/:id/approve', verifyToken, requireRole('admin'), (req, res) => {
   res.json(product);
 });
 
-module.exports = router;
+export default router;

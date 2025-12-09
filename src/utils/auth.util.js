@@ -1,22 +1,22 @@
 // src/utils/auth.util.js
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const SECRET = 'supersecretkey';
 
-function hashPassword(password) {
+export function hashPassword(password) {
   return bcrypt.hashSync(password, 10);
 }
 
-function comparePassword(password, hash) {
+export function comparePassword(password, hash) {
   return bcrypt.compareSync(password, hash);
 }
 
-function generateToken(user) {
+export function generateToken(user) {
   return jwt.sign({ id: user.id, role: user.role }, SECRET, { expiresIn: '1h' });
 }
 
-function verifyToken(req, res, next) {
+export function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ message: 'No token provided' });
   
@@ -25,12 +25,12 @@ function verifyToken(req, res, next) {
     const decoded = jwt.verify(token, SECRET);
     req.user = decoded;
     next();
-  } catch (err) {
+  } catch {
     res.status(401).json({ message: 'Invalid token' });
   }
 }
 
-function requireRole(role) {
+export function requireRole(role) {
   return (req, res, next) => {
     if (req.user.role !== role) {
       return res.status(403).json({ message: 'Forbidden' });
@@ -38,5 +38,3 @@ function requireRole(role) {
     next();
   };
 }
-
-module.exports = { hashPassword, comparePassword, generateToken, verifyToken, requireRole };

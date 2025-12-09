@@ -1,8 +1,9 @@
 // src/routes/marketplace/admin.route.js
-const express = require('express');
-const router = express.Router();
-const store = require('../../data/store');
-const { verifyToken, requireRole } = require('../../utils/auth.util');
+import { Router } from 'express';
+import store from '../../data/store.js';
+import { verifyToken, requireRole } from '../../utils/auth.util.js';
+
+const router = Router();
 
 // List users
 router.get('/users', verifyToken, requireRole('admin'), (req, res) => {
@@ -23,4 +24,4 @@ router.get('/products/pending', verifyToken, requireRole('admin'), (req, res) =>
   res.json(pending);
 });
 
-module.exports = router;
+export default router;
